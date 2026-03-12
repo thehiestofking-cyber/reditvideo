@@ -1,0 +1,649 @@
+[
+  {
+    "id": "TC001",
+    "title": "Successful Reddit video extraction shows preview and download link",
+    "description": "Verifies that a valid Reddit post URL with video results in a visible video preview and a downloadable link.",
+    "category": "Reddit Video Downloader",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Reddit\""
+      },
+      {
+        "type": "action",
+        "description": "Fill \"a valid Reddit post URL that contains a video\" into the reddit video URL input field"
+      },
+      {
+        "type": "action",
+        "description": "Click the submit/download button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"video preview\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"download link\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Invalid URL is rejected with a clear validation error",
+    "description": "Verifies that a non-Reddit or malformed URL triggers a visible invalid URL error message.",
+    "category": "Reddit Video Downloader",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill \"https://example.com/not-reddit\" into the reddit video URL input field"
+      },
+      {
+        "type": "action",
+        "description": "Click the submit/download button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"invalid\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Reddit\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"video preview\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Empty submission prompts user to enter a URL",
+    "description": "Verifies that submitting with an empty input shows a visible error or prompt to paste a Reddit post link.",
+    "category": "Reddit Video Downloader",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the submit/download button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"paste\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Reddit\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"download link\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Valid Reddit URL with no video shows 'no downloadable video' error",
+    "description": "Verifies that a valid Reddit post URL that has no video results in an appropriate visible no-video error message.",
+    "category": "Reddit Video Downloader",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill \"a valid Reddit post URL that contains no video\" into the reddit video URL input field"
+      },
+      {
+        "type": "action",
+        "description": "Click the submit/download button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"no\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"video\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"video preview\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Replacing the URL and resubmitting updates the result state",
+    "description": "Verifies that running a second submission after changing the URL updates the UI from success to error (or vice versa) without requiring a page reload.",
+    "category": "Reddit Video Downloader",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill \"a valid Reddit post URL that contains a video\" into the reddit video URL input field"
+      },
+      {
+        "type": "action",
+        "description": "Click the submit/download button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"video preview\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Fill \"https://example.com/not-reddit\" into the reddit video URL input field"
+      },
+      {
+        "type": "action",
+        "description": "Click the submit/download button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"invalid\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Terms and Privacy pages are reachable from the app",
+    "description": "Verifies that legal pages are accessible and render expected headings/content.",
+    "category": "Reddit Video Downloader",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /terms"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Terms\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /privacy"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Privacy\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/privacy\""
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Unknown route shows Not Found page",
+    "description": "Verifies the app displays a 404/Not Found view for an invalid path.",
+    "category": "Reddit Video Downloader",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /this-route-should-not-exist"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Not Found\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/this-route-should-not-exist\""
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Open Terms page and verify core Terms content is displayed",
+    "description": "Verifies that navigating to the Terms route shows the Terms and Conditions page content to the user.",
+    "category": "Terms and Conditions Page",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /terms"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Terms\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Terms\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Terms and Conditions\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Terms and Conditions content\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Terms page footer links allow navigation to Privacy Policy",
+    "description": "Verifies that a user can navigate from the Terms page to the Privacy page using visible links (without direct URL entry).",
+    "category": "Terms and Conditions Page",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /terms"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Privacy\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Privacy\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/privacy\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Privacy\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Terms page provides a way to return to Home",
+    "description": "Verifies that the Terms page includes a visible navigation option back to the Home page.",
+    "category": "Terms and Conditions Page",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /terms"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Home\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Home\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Reddit post URL input\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Terms page can be reached from Home page link",
+    "description": "Verifies that the user can reach the Terms and Conditions page from the Home page via an on-page Terms link.",
+    "category": "Terms and Conditions Page",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Terms\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Terms\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/terms\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Terms and Conditions\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Terms route does not land on 404 page",
+    "description": "Verifies that the static /terms route resolves correctly and does not show the Not Found page content.",
+    "category": "Terms and Conditions Page",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /terms"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/terms\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Not Found\" is not visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Terms and Conditions\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Open Privacy Policy page and see policy content",
+    "description": "Verifies that navigating to the Privacy Policy page shows visible privacy policy content.",
+    "category": "Privacy Policy Page",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /privacy"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/privacy\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Privacy\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Privacy\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Privacy Policy content\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Privacy Policy page shows clear content structure (headings/sections)",
+    "description": "Verifies the Privacy Policy page renders readable, sectioned content rather than a blank or broken page.",
+    "category": "Privacy Policy Page",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /privacy"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Privacy\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"A section heading within the privacy policy\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"A paragraph of privacy policy text\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"A link or reference within the privacy policy\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Privacy Policy page has no obvious rendering failure state on load",
+    "description": "Verifies the Privacy Policy page does not show a not-found or generic error state during a normal load.",
+    "category": "Privacy Policy Page",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /privacy"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/privacy\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"404\" is not visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Not Found\" is not visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Privacy Policy content\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Privacy Policy page contains a visible last-updated/effective-date indicator (if provided)",
+    "description": "Verifies that an effective date or last updated indicator is visible to users if the page includes it.",
+    "category": "Privacy Policy Page",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /privacy"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Privacy\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Last updated\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Navigate from Home to Privacy Policy via footer/header link (if present)",
+    "description": "Verifies users can reach the Privacy Policy page through an in-app navigation link.",
+    "category": "Privacy Policy Page",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the bottom of the page"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Privacy\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/privacy\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Privacy Policy content\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Direct navigation to an unknown route shows the 404 page",
+    "description": "Verifies that navigating to an invalid URL displays a clear Not Found page.",
+    "category": "Not Found (404) Page",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /non-existent-route"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"404\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Not Found\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Use the 404 page link to return to Home",
+    "description": "Verifies that the 404 page provides a working path back to the home downloader page.",
+    "category": "Not Found (404) Page",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /non-existent-route"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"404\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Home\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"URL input\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "404 page displays a clear message and guidance to go back",
+    "description": "Verifies the 404 page includes user-friendly guidance to recover (e.g., go back home).",
+    "category": "Not Found (404) Page",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /non-existent-route"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"404\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"page\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"link to return to home\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC021",
+    "title": "404 page remains visible after refresh on an unknown route",
+    "description": "Verifies that the Not Found page is stable when reloading an invalid route.",
+    "category": "Not Found (404) Page",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /non-existent-route"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"404\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Press \"Enter\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"404\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC022",
+    "title": "Wildcard route (*) maps to the Not Found page for random unknown paths",
+    "description": "Verifies that arbitrary unknown paths consistently show the Not Found page.",
+    "category": "Not Found (404) Page",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /this-route-should-not-exist-12345"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"404\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Not Found\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC023",
+    "title": "From 404 page, returning home shows downloader UI is usable",
+    "description": "Verifies that returning from 404 to Home shows the expected primary UI entry point (URL input).",
+    "category": "Not Found (404) Page",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /non-existent-route"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"404\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Back to Home\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"URL input\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"https://www.reddit.com\" into \"URL input\""
+      }
+    ]
+  }
+]

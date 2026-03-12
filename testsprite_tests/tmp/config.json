@@ -1,0 +1,18 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:8080",
+  "executionArgs": {
+    "projectName": "reddit-video-grabber-main",
+    "projectPath": "c:\\Users\\Vicky\\Desktop\\reddit-video-grabber-main_2\\reddit-video-grabber-main",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-btbmo6Xzcfj6R4ZVqW0I_oWHaX9JE_VESE0h7hw--NdcXwFC6KL-xtVOnQEgDLa0bcWSQ2VfVjRlZKmT-NmEjDc21PgsEHjHnjO4SUxsDnjljNrailRwsyq_dJsg7S_ISHQ"
+    }
+  },
+  "serverPort": 56633,
+  "proxy": "http://2b0217f3-cfe8-4761-87d7-70d599fe2062:7B36NOZEOWvQvh5RDH6A2lCl9T5s3Z3Z@tun.testsprite.com:8080"
+}

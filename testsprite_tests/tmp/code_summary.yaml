@@ -1,0 +1,44 @@
+version: "2"
+type: frontend
+tech_stack:
+  - react
+  - vite
+  - tailwindcss
+  - typescript
+routes:
+  - path: /
+    file: src/pages/Index.tsx
+    auth_required: false
+    description: Home page to download reddit videos
+  - path: /terms
+    file: src/pages/Terms.tsx
+    auth_required: false
+    description: Terms and conditions page
+  - path: /privacy
+    file: src/pages/Privacy.tsx
+    auth_required: false
+    description: Privacy policy page
+  - path: "*"
+    file: src/pages/NotFound.tsx
+    auth_required: false
+    description: Not found 404 page
+features:
+  - name: Reddit Video Downloader
+    description: User can paste a Reddit URL and grab the mp4 video without login
+    files:
+      - src/pages/Index.tsx
+      - src/components/UrlInput.tsx
+      - src/components/VideoPreview.tsx
+      - src/lib/redditApi.ts
+    entry_route: /
+    user_interactions:
+      - Fill reddit video URL input field
+      - Click submit/download button
+      - See video preview
+      - Click download link to save video
+      - See error message if invalid URL
+    api_calls:
+      - method: GET
+        endpoint: https://api.reddit.com/api/info/?id=
+    auth_required: false
+known_limitations: []
